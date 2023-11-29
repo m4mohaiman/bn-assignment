@@ -49,6 +49,15 @@ function App() {
     setCvvNumber(e.target.value);
   };
 
+  const handlePayment = () => {
+    setCardNumber("");
+    setCardUserName("Your Full Name");
+    setCardExpireMonth("MM");
+    setCardExpireYear("YY");
+    setCvvNumber("***");
+    alert("Payment done!");
+  };
+
   return (
     <div className="container">
       <form className="form">
@@ -154,7 +163,7 @@ function App() {
           </div>
         </div>
         <div className="button__area">
-          <button>Payment</button>
+          <button onClick={handlePayment}>Payment</button>
         </div>
       </form>
     </div>
