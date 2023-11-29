@@ -16,6 +16,7 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   height: 100vh;
+  background-color: rgba(72, 0, 255, 0.0509803922);
 }
 
 .mt {
@@ -157,4 +158,5 @@ body {
   color: #fff;
   padding: 10px 0px;
   border-radius: 5px;
+  cursor: pointer;
 }/*# sourceMappingURL=app.css.map */
