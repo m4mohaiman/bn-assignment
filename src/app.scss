@@ -1,0 +1,105 @@
+@import "./index.scss";
+
+.form {
+  max-width: 500px;
+  max-height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 3px 3px 40px #545454e8;
+  position: relative;
+  h4 {
+    color: #555;
+    font-size: 0.9rem;
+  }
+  input , select {
+    margin: 1rem 0;
+    padding: 0.75rem 0.25rem;
+    outline: none;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    position: relative;
+    width: 100%;
+  }
+}
+
+.card {
+  height: 225px;
+  width: 100%;
+  max-width: 354px;
+  border-radius: 15px;
+  padding: 34px 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-image: url("./assets/card-bg.png");
+  background-size: cover;
+  background-position: center;
+  color: #eee;
+  margin: 0 auto;
+  filter: drop-shadow(1px 3px 10px #22222224);
+  animation: fadeIn 0.2s linear 1;
+  margin-top: 1rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  height: 70px;
+}
+
+.sticker {
+  width: 35px;
+  height: 28px;
+  background-image: url("./assets/sim.png");
+  background-position: center;
+  background-size: cover;
+  object-fit: contain;
+  border-radius: 5px;
+}
+
+.logo {
+  max-width: 60px;
+}
+
+.body {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  height: 60%;
+  &__card-number {
+    font-weight: 400;
+  }
+}
+
+.footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 75px;
+  &_context{
+    h5{
+        font-weight: 400;
+    }
+    h3{
+        font-weight: 500;
+    }
+
+  }
+}
+
+.input-container {
+  position: relative;
+  font-size: 1rem;
+  color: #333;
+}
+
+.input-grp {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 0.5rem;
+  }
