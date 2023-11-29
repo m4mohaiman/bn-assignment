@@ -4,7 +4,7 @@ import cardLogo from "./assets/visa.png";
 
 function App() {
   const [cardNumber, setCardNumber] = useState("");
-  const [cardUserName, setCardUserName] = useState("Your Full Name");
+  const [cardUserName, setCardUserName] = useState("Your Name");
   const [cardExpireMonth, setCardExpireMonth] = useState("MM");
   const [cardExpireYear, setCardExpireYear] = useState("YYYY");
   const [cardNumberError, setCardNumberError] = useState("");
@@ -60,6 +60,7 @@ function App() {
                 <p>{cvvNumber}</p>
               </div>
             </div>
+<<<<<<< HEAD
           ) : (
             <>
               <div className="header">
@@ -91,6 +92,26 @@ function App() {
               </div>
             </>
           )}
+=======
+          </div>
+          <div className="body">
+            <h2 className="body__card-number">
+              {cardNumber === "" ? "XXXX XXXX XXXX XXXX" : cardNumber}{" "}
+            </h2>
+          </div>
+          <div className="footer">
+            <div className="footer__context">
+              <h5>Card Holder name</h5>
+              <h3>{cardUserName.length > 14 ? `${cardUserName.slice(0, 14)}...` : cardUserName}</h3>
+            </div>
+            <div>
+              <h5>Expiry Date</h5>
+              <h3>
+                {cardExpireMonth} / {cardExpireYear}
+              </h3>
+            </div>
+          </div>
+>>>>>>> fc512aad4aafafb57225d9d93efc18a0ab6b85e2
         </div>
         <div className="input-container mt">
           <h4>Enter card number</h4>
@@ -106,7 +127,7 @@ function App() {
           <h4>Card Holder</h4>
           <input
             type="text"
-            placeholder="Please enter your full name"
+            placeholder="Please enter your name"
             onChange={handleCardUserName}
           />
         </div>
