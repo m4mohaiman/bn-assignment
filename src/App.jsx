@@ -4,7 +4,7 @@ import cardLogo from "./assets/visa.png";
 
 function App() {
   const [cardNumber, setCardNumber] = useState("");
-  const [cardUserName, setCardUserName] = useState("Your Full Name");
+  const [cardUserName, setCardUserName] = useState("Your Name");
   const [cardExpireMonth, setCardExpireMonth] = useState("MM");
   const [cardExpireYear, setCardExpireYear] = useState("YYYY");
   const [cardNumberError, setCardNumberError] = useState("");
@@ -53,7 +53,7 @@ function App() {
           <div className="footer">
             <div className="footer__context">
               <h5>Card Holder name</h5>
-              <h3>{cardUserName}</h3>
+              <h3>{cardUserName.length > 14 ? `${cardUserName.slice(0, 14)}...` : cardUserName}</h3>
             </div>
             <div>
               <h5>Expiry Date</h5>
@@ -77,7 +77,7 @@ function App() {
           <h4>Card Holder</h4>
           <input
             type="text"
-            placeholder="Please enter your full name"
+            placeholder="Please enter your name"
             onChange={handleCardUserName}
           />
         </div>
@@ -85,18 +85,18 @@ function App() {
           <div className="input-container">
             <h4>Expiration Year</h4>
             <select value={cardExpireMonth} onChange={handleCardExpireMonth}>
-              <option value="January">January</option>
-              <option value="February">February</option>
-              <option value="March">March</option>
-              <option value="April">April</option>
+              <option value="Jan">January</option>
+              <option value="Feb">February</option>
+              <option value="Mar">March</option>
+              <option value="Apr">April</option>
               <option value="May">May</option>
-              <option value="June">June</option>
-              <option value="July">July</option>
-              <option value="August">August</option>
-              <option value="September">September</option>
-              <option value="October">October</option>
-              <option value="November">November</option>
-              <option value="December">December</option>
+              <option value="Jun">June</option>
+              <option value="Jul">July</option>
+              <option value="Aug">August</option>
+              <option value="Sept">September</option>
+              <option value="Oct">October</option>
+              <option value="Nov">November</option>
+              <option value="Dec">December</option>
             </select>
           </div>
           <div className="input-container">
