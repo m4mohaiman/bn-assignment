@@ -3,13 +3,24 @@ import "./app.scss";
 import cardLogo from "./assets/visa.png";
 
 function App() {
-  const [cardNumber, setCardNumber] = useState("#### #### #### ####");
+  const [cardNumber, setCardNumber] = useState("");
   const [cardUserName, setCardUserName] = useState("Your Full Name");
   const [cardExpireMonth, setCardExpireMonth] = useState("MM");
   const [cardExpireYear, setCardExpireYear] = useState("YYYY");
+  const [cardNumberError, setCardNumberError] = useState("");
 
   const handleCardNumber = (e) => {
-    setCardNumber(e.target.value);
+    const inputCardNumber = e.target.value.replace(/\D/g, "");
+    if (inputCardNumber.length < 16) {
+      setCardNumberError("Card number should be 16 digits");
+    } else {
+      setCardNumberError("");
+    }
+    const formatCardNumber = inputCardNumber
+      .slice(0, 16)
+      .replace(/(\d{4})/g, "$1 ")
+      .trim();
+    setCardNumber(formatCardNumber);
   };
 
   const handleCardUserName = (e) => {
@@ -35,7 +46,9 @@ function App() {
             </div>
           </div>
           <div className="body">
-            <h2 className="body__card-number">{cardNumber}</h2>
+            <h2 className="body__card-number">
+              {cardNumber === "" ? "XXXX XXXX XXXX XXXX" : cardNumber}{" "}
+            </h2>
           </div>
           <div className="footer">
             <div className="footer__context">
@@ -56,7 +69,9 @@ function App() {
             type="text"
             placeholder="Please enter your credit card number"
             onChange={handleCardNumber}
+            value={cardNumber}
           />
+          {cardNumberError && <p className="error">{cardNumberError}</p>}
         </div>
         <div className="input-container">
           <h4>Card Holder</h4>
