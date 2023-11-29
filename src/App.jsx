@@ -8,6 +8,8 @@ function App() {
   const [cardExpireMonth, setCardExpireMonth] = useState("MM");
   const [cardExpireYear, setCardExpireYear] = useState("YYYY");
   const [cardNumberError, setCardNumberError] = useState("");
+  const [cvvNumber, setCvvNumber] = useState("***");
+  const [isCVVFocused, setIsCVVFocused] = useState(false);
 
   const handleCardNumber = (e) => {
     const inputCardNumber = e.target.value.replace(/\D/g, "");
@@ -35,33 +37,60 @@ function App() {
     setCardExpireYear(e.target.value);
   };
 
+  const handleCVVFocus = () => {
+    setIsCVVFocused(true);
+  };
+
+  const handleCVVBlur = () => {
+    setIsCVVFocused(false);
+  };
+
+  const handleCVVNumber = (e) => {
+    setCvvNumber(e.target.value);
+  };
+
   return (
     <div className="container">
       <form className="form">
-        <div className="card">
-          <div className="header">
-            <div className="sticker"></div>
-            <div>
-              <img src={cardLogo} alt="visa logo" className="logo" />
+        <div className={`card ${isCVVFocused ? "cvv__focused" : ""}`}>
+          {isCVVFocused ? (
+            <div className="cvv__content">
+              <p>Your Card Security Number </p>
+              <div className="cvv__number">
+                <p>{cvvNumber}</p>
+              </div>
             </div>
-          </div>
-          <div className="body">
-            <h2 className="body__card-number">
-              {cardNumber === "" ? "XXXX XXXX XXXX XXXX" : cardNumber}{" "}
-            </h2>
-          </div>
-          <div className="footer">
-            <div className="footer__context">
-              <h5>Card Holder name</h5>
-              <h3>{cardUserName}</h3>
-            </div>
-            <div>
-              <h5>Expiry Date</h5>
-              <h3>
-                {cardExpireMonth} / {cardExpireYear}
-              </h3>
-            </div>
-          </div>
+          ) : (
+            <>
+              <div className="header">
+                <div className="sticker"></div>
+                <div>
+                  <img src={cardLogo} alt="visa logo" className="logo" />
+                </div>
+              </div>
+              <div className="body">
+                <h2 className="body__card-number">
+                  {cardNumber === "" ? "XXXX XXXX XXXX XXXX" : cardNumber}{" "}
+                </h2>
+              </div>
+              <div className="footer">
+                <div className="footer__context">
+                  <h5>Card Holder name</h5>
+                  <h3>
+                    {cardUserName.length > 15
+                      ? `${cardUserName.slice(0, 15)}...`
+                      : cardUserName}
+                  </h3>
+                </div>
+                <div>
+                  <h5>Expiry Date</h5>
+                  <h3>
+                    {cardExpireMonth} / {cardExpireYear}
+                  </h3>
+                </div>
+              </div>
+            </>
+          )}
         </div>
         <div className="input-container mt">
           <h4>Enter card number</h4>
@@ -85,18 +114,18 @@ function App() {
           <div className="input-container">
             <h4>Expiration Year</h4>
             <select value={cardExpireMonth} onChange={handleCardExpireMonth}>
-              <option value="January">January</option>
-              <option value="February">February</option>
-              <option value="March">March</option>
-              <option value="April">April</option>
+              <option value="Jan">January</option>
+              <option value="Feb">February</option>
+              <option value="Mar">March</option>
+              <option value="Apr">April</option>
               <option value="May">May</option>
-              <option value="June">June</option>
-              <option value="July">July</option>
-              <option value="August">August</option>
-              <option value="September">September</option>
-              <option value="October">October</option>
-              <option value="November">November</option>
-              <option value="December">December</option>
+              <option value="Jun">June</option>
+              <option value="Jul">July</option>
+              <option value="Aug">August</option>
+              <option value="Sept">September</option>
+              <option value="Oct">October</option>
+              <option value="Nov">November</option>
+              <option value="Dec">December</option>
             </select>
           </div>
           <div className="input-container">
@@ -115,8 +144,17 @@ function App() {
           </div>
           <div className="input-container">
             <h4>CVV</h4>
-            <input type="text" placeholder="CVV" />
+            <input
+              type="text"
+              placeholder="CVV"
+              onFocus={handleCVVFocus}
+              onBlur={handleCVVBlur}
+              onChange={handleCVVNumber}
+            />
           </div>
+        </div>
+        <div className="button__area">
+          <button>Payment</button>
         </div>
       </form>
     </div>

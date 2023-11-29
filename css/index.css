@@ -1,5 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;500;600;700;800;900&display=swap");
-
 * {
   margin: 0;
   padding: 0;
@@ -17,9 +16,9 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   height: 100vh;
-  background-color: #4800ff0d;
+  background-color: rgba(72, 0, 255, 0.0509803922);
 }
 
 .mt {
   margin-top: 2rem;
-}
+}/*# sourceMappingURL=index.css.map */
