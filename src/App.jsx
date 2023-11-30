@@ -1,6 +1,8 @@
 import { useState } from "react";
 import "./app.scss";
 import cardLogo from "./assets/visa.png";
+import ReactCardFlip from "react-card-flip";
+import Tilt from "react-parallax-tilt";
 
 function App() {
   const [cardNumber, setCardNumber] = useState("");
@@ -9,7 +11,7 @@ function App() {
   const [cardExpireYear, setCardExpireYear] = useState("YYYY");
   const [cardNumberError, setCardNumberError] = useState("");
   const [cvvNumber, setCvvNumber] = useState("***");
-  const [isCVVFocused, setIsCVVFocused] = useState(false);
+  const [isFlipped, setIsFlipped] = useState(false);
 
   const handleCardNumber = (e) => {
     const inputCardNumber = e.target.value.replace(/\D/g, "");
@@ -35,14 +37,6 @@ function App() {
 
   const handleCardExpireYear = (e) => {
     setCardExpireYear(e.target.value);
-  };
-
-  const handleCVVFocus = () => {
-    setIsCVVFocused(true);
-  };
-
-  const handleCVVBlur = () => {
-    setIsCVVFocused(false);
   };
 
   const handleCVVNumber = (e) => {
@@ -71,49 +65,67 @@ function App() {
     alert("Payment done!");
   };
 
+  const handleClickFlip = (e) => {
+    e.preventDefault();
+    setIsFlipped((prevState) => !prevState);
+  };
+
   return (
     <div className="container">
       <form className="form">
-        <div className={`card ${isCVVFocused ? "cvv__focused" : ""}`}>
-          {isCVVFocused ? (
-            <div className="cvv__content">
-              <p>Your Card Security Number </p>
-              <div className="cvv__number">
-                <p>{cvvNumber}</p>
-              </div>
-            </div>
-          ) : (
-            <>
-              <div className="header">
-                <div className="sticker"></div>
-                <div>
-                  <img src={cardLogo} alt="visa logo" className="logo" />
+        <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
+          <div className="card__front">
+            <Tilt>
+              <div className="card">
+                <div className="header">
+                  <div className="sticker"></div>
+                  <div>
+                    <img src={cardLogo} alt="visa logo" className="logo" />
+                  </div>
+                </div>
+                <div className="body">
+                  <h2 className="body__card-number">
+                    {cardNumber === "" ? "XXXX XXXX XXXX XXXX" : cardNumber}{" "}
+                  </h2>
+                </div>
+                <div className="footer">
+                  <div className="footer__context">
+                    <h5>Card Holder name</h5>
+                    <h3>
+                      {cardUserName.length > 15
+                        ? `${cardUserName.slice(0, 15)}...`
+                        : cardUserName}
+                    </h3>
+                  </div>
+                  <div className="footer__expriy">
+                    <h5>Expiry Date</h5>
+                    <h3>
+                      {cardExpireMonth} / {cardExpireYear}
+                    </h3>
+                  </div>
                 </div>
               </div>
-              <div className="body">
-                <h2 className="body__card-number">
-                  {cardNumber === "" ? "XXXX XXXX XXXX XXXX" : cardNumber}{" "}
-                </h2>
-              </div>
-              <div className="footer">
-                <div className="footer__context">
-                  <h5>Card Holder name</h5>
-                  <h3>
-                    {cardUserName.length > 15
-                      ? `${cardUserName.slice(0, 15)}...`
-                      : cardUserName}
-                  </h3>
-                </div>
-                <div className="footer__expriy">
-                  <h5>Expiry Date</h5>
-                  <h3>
-                    {cardExpireMonth} / {cardExpireYear}
-                  </h3>
+            </Tilt>
+
+            <button className="btn-flip" onClick={handleClickFlip}>Click for CVV</button>
+          </div>
+
+          <div className="card__back">
+            <Tilt>
+              <div className="card">
+                <div className="cvv__content">
+                  <p>Your Card Security Number </p>
+                  <div className="cvv__number">
+                    <p>{cvvNumber}</p>
+                  </div>
                 </div>
               </div>
-            </>
-          )}
-        </div>
+            </Tilt>
+
+            <button className="btn-flip" onClick={handleClickFlip}>Back</button>
+          </div>
+        </ReactCardFlip>
+
         <div className="input-container mt">
           <h4>Enter card number</h4>
           <input
@@ -170,8 +182,6 @@ function App() {
               type="text"
               placeholder="CVV"
               value={cvvNumber}
-              onFocus={handleCVVFocus}
-              onBlur={handleCVVBlur}
               onChange={handleCVVNumber}
             />
           </div>
