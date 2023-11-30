@@ -47,14 +47,11 @@ function App() {
 
   const handleCVVNumber = (e) => {
     const inputCVVNumber = e.target.value.replace(/\D/g, "");
-    const formatCVVNumber = inputCVVNumber
-      .slice(0, 3)
-      .trim();
-      setCvvNumber(formatCVVNumber);
+    const formatCVVNumber = inputCVVNumber.slice(0, 3).trim();
+    setCvvNumber(formatCVVNumber);
   };
 
   const handlePayment = () => {
-
     if (
       cardNumber.trim() === "" ||
       cardUserName.trim() === "" ||
@@ -65,7 +62,6 @@ function App() {
       alert("Please fill in all the required fields before making a payment.");
       return;
     }
-
 
     setCardNumber("");
     setCardUserName("Your Full Name");
