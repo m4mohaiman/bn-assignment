@@ -1,7 +1,7 @@
 @import "./index.scss";
 
 .form {
-  max-width: 500px;
+  width: 500px;
   max-height: 100%;
   display: flex;
   justify-content: center;
@@ -74,6 +74,13 @@
   height: 60%;
   &__card-number {
     font-weight: 400;
+    input {
+      background-color: transparent;
+      border: 0;
+      color: #fff;
+      font-size: 1.1em;
+      padding: 0;
+    }
   }
 }
 
@@ -85,7 +92,6 @@
   height: 75px;
   &__context {
     h5 {
-      font-weight: 600;
       text-align: left;
     }
     h3 {
@@ -107,22 +113,18 @@
   grid-gap: 0.5rem;
 }
 
-.error {
-  color: #db2d2d;
-  font-weight: 500;
-}
-
 .cvv__number {
-  background-color: #efefef;
-  width: 75%;
-  padding: 10px 10px;
-  margin-top: 0.8rem;
-  border-radius: 5px;
-  border: 2xp solid #333;
-  p {
+  display: flex;
+  input {
+    width: 100%;
+    padding: 10px 10px;
+    margin-top: 0.8rem;
+    border-radius: 5px;
+    border: 2xp solid #333;
     color: #000;
     text-align: right;
     font-style: italic;
+    font-size: 1rem;
   }
 }
 
@@ -141,18 +143,67 @@
   }
 }
 
-.card__front , .card__back {
+.card__front,
+.card__back {
   text-align: center;
 }
 
-.btn-flip{
+.btn-flip {
   cursor: pointer;
-  background-color: #332C67;
+  background-color: #332c67;
   color: #fff;
   border: none;
   padding: 5px 15px;
   border-radius: 5px;
   font-weight: 500;
   margin-top: 15px;
+}
+.body__card-number {
+  input::placeholder {
+    font-size: 0.6em;
+    color: #ededed;
+  }
+}
 
+.footer {
+  &__context {
+    input {
+      background-color: transparent;
+      border: 0;
+      padding: 0;
+      font-size: 1.2em;
+      font-weight: 600;
+      color: #fff;
+      max-width: 170px;
+    }
+  }
+}
+
+.footer__context input::placeholder {
+  color: #fff;
+  font-size: 1em;
+}
+
+.footer__expriy {
+  text-align: left;
+  div {
+    display: flex;
+  }
+}
+
+.monthYear {
+  input {
+    background-color: transparent;
+    border: 0;
+    padding: 0;
+    font-size: 1.2em;
+    font-weight: 600;
+    color: #fff;
+    max-width: 50px;
+  }
+}
+
+.monthYear input::placeholder {
+  color: #fff;
+  font-size: 1em;
 }

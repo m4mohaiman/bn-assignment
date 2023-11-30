@@ -5,21 +5,15 @@ import ReactCardFlip from "react-card-flip";
 import Tilt from "react-parallax-tilt";
 
 function App() {
-  const [cardNumber, setCardNumber] = useState("");
-  const [cardUserName, setCardUserName] = useState("Your Full Name");
-  const [cardExpireMonth, setCardExpireMonth] = useState("MM");
-  const [cardExpireYear, setCardExpireYear] = useState("YYYY");
-  const [cardNumberError, setCardNumberError] = useState("");
+  const [cardNumber, setCardNumber] = useState("#### #### #### ####");
+  const [cardUserName, setCardUserName] = useState("");
+  const [cardExpireMonth, setCardExpireMonth] = useState("");
+  const [cardExpireYear, setCardExpireYear] = useState("");
   const [cvvNumber, setCvvNumber] = useState("***");
   const [isFlipped, setIsFlipped] = useState(false);
 
   const handleCardNumber = (e) => {
     const inputCardNumber = e.target.value.replace(/\D/g, "");
-    if (inputCardNumber.length < 16) {
-      setCardNumberError("Card number should be 16 digits");
-    } else {
-      setCardNumberError("");
-    }
     const formatCardNumber = inputCardNumber
       .slice(0, 16)
       .replace(/(\d{4})/g, "$1 ")
@@ -32,11 +26,15 @@ function App() {
   };
 
   const handleCardExpireMonth = (e) => {
-    setCardExpireMonth(e.target.value);
+    const inputMonth = e.target.value.replace(/\D/g, "");
+    const formatMonth = inputMonth.slice(0, 2).trim();
+    setCardExpireMonth(formatMonth);
   };
 
   const handleCardExpireYear = (e) => {
-    setCardExpireYear(e.target.value);
+    const inputYear = e.target.value.replace(/\D/g, "");
+    const formatYear = inputYear.slice(0, 4).trim();
+    setCardExpireYear(formatYear);
   };
 
   const handleCVVNumber = (e) => {
@@ -85,29 +83,54 @@ function App() {
                 </div>
                 <div className="body">
                   <h2 className="body__card-number">
-                    {cardNumber === "" ? "XXXX XXXX XXXX XXXX" : cardNumber}{" "}
+                    <input
+                      type="text"
+                      placeholder="Please enter your credit card number"
+                      onChange={handleCardNumber}
+                      value={cardNumber}
+                    />
                   </h2>
                 </div>
                 <div className="footer">
                   <div className="footer__context">
                     <h5>Card Holder name</h5>
-                    <h3>
-                      {cardUserName.length > 15
-                        ? `${cardUserName.slice(0, 15)}...`
-                        : cardUserName}
-                    </h3>
+                    <input
+                      type="text"
+                      placeholder="Your Full Name"
+                      onChange={handleCardUserName}
+                      value={cardUserName}
+                    />
                   </div>
                   <div className="footer__expriy">
                     <h5>Expiry Date</h5>
-                    <h3>
-                      {cardExpireMonth} / {cardExpireYear}
-                    </h3>
+                    <div className="monthYear">
+                      <div className="month">
+                        <input
+                          style={{ width: "40px" }}
+                          type="text"
+                          value={cardExpireMonth}
+                          onChange={handleCardExpireMonth}
+                          placeholder="MM"
+                        />
+                      </div>
+                      <div>/ &nbsp;</div>
+                      <div className="year">
+                        <input
+                          type="text"
+                          value={cardExpireYear}
+                          onChange={handleCardExpireYear}
+                          placeholder="YYYY"
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </Tilt>
 
-            <button className="btn-flip" onClick={handleClickFlip}>Click for CVV</button>
+            <button className="btn-flip" onClick={handleClickFlip}>
+              Click for CVV
+            </button>
           </div>
 
           <div className="card__back">
@@ -116,76 +139,22 @@ function App() {
                 <div className="cvv__content">
                   <p>Your Card Security Number </p>
                   <div className="cvv__number">
-                    <p>{cvvNumber}</p>
+                    <input
+                      type="text"
+                      value={cvvNumber}
+                      onChange={handleCVVNumber}
+                      placeholder="***"
+                    />
                   </div>
                 </div>
               </div>
             </Tilt>
 
-            <button className="btn-flip" onClick={handleClickFlip}>Back</button>
+            <button className="btn-flip" onClick={handleClickFlip}>
+              Back
+            </button>
           </div>
         </ReactCardFlip>
-
-        <div className="input-container mt">
-          <h4>Enter card number</h4>
-          <input
-            type="text"
-            placeholder="Please enter your credit card number"
-            onChange={handleCardNumber}
-            value={cardNumber}
-          />
-          {cardNumberError && <p className="error">{cardNumberError}</p>}
-        </div>
-        <div className="input-container">
-          <h4>Card Holder</h4>
-          <input
-            type="text"
-            placeholder="Please enter your full name"
-            onChange={handleCardUserName}
-          />
-        </div>
-        <div className="input-grp">
-          <div className="input-container">
-            <h4>Expiration Year</h4>
-            <select value={cardExpireMonth} onChange={handleCardExpireMonth}>
-              <option value="Jan">January</option>
-              <option value="Feb">February</option>
-              <option value="Mar">March</option>
-              <option value="Apr">April</option>
-              <option value="May">May</option>
-              <option value="Jun">June</option>
-              <option value="Jul">July</option>
-              <option value="Aug">August</option>
-              <option value="Sept">September</option>
-              <option value="Oct">October</option>
-              <option value="Nov">November</option>
-              <option value="Dec">December</option>
-            </select>
-          </div>
-          <div className="input-container">
-            <h4>Month</h4>
-            <select value={cardExpireYear} onChange={handleCardExpireYear}>
-              <option value="2021">2021</option>
-              <option value="2022">2022</option>
-              <option value="2023">2023</option>
-              <option value="2024">2024</option>
-              <option value="2025">2025</option>
-              <option value="2026">2026</option>
-              <option value="2027">2027</option>
-              <option value="2028">2028</option>
-              <option value="2029">2029</option>
-            </select>
-          </div>
-          <div className="input-container">
-            <h4>CVV</h4>
-            <input
-              type="text"
-              placeholder="CVV"
-              value={cvvNumber}
-              onChange={handleCVVNumber}
-            />
-          </div>
-        </div>
         <div className="button__area">
           <button onClick={handlePayment}>Payment</button>
         </div>
