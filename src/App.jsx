@@ -46,10 +46,27 @@ function App() {
   };
 
   const handleCVVNumber = (e) => {
-    setCvvNumber(e.target.value);
+    const inputCVVNumber = e.target.value.replace(/\D/g, "");
+    const formatCVVNumber = inputCVVNumber
+      .slice(0, 3)
+      .trim();
+      setCvvNumber(formatCVVNumber);
   };
 
   const handlePayment = () => {
+
+    if (
+      cardNumber.trim() === "" ||
+      cardUserName.trim() === "" ||
+      cardExpireMonth.trim() === "" ||
+      cardExpireYear.trim() === "" ||
+      cvvNumber.trim() === "***"
+    ) {
+      alert("Please fill in all the required fields before making a payment.");
+      return;
+    }
+
+
     setCardNumber("");
     setCardUserName("Your Full Name");
     setCardExpireMonth("MM");
@@ -156,6 +173,7 @@ function App() {
             <input
               type="text"
               placeholder="CVV"
+              value={cvvNumber}
               onFocus={handleCVVFocus}
               onBlur={handleCVVBlur}
               onChange={handleCVVNumber}
