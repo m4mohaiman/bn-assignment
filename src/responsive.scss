@@ -1,8 +1,24 @@
 @media (max-width: 500px) {
+   body{
+    display: block;
+    height: auto;
+   }
   .input-grp{
     display: block;
   }
   .body__card-number{
     font-size: 1.2rem;
+  }
+  .card{
+    height: 200px;
+    padding: 20px;
+  }
+  .footer__context , .footer__expriy{
+    h5{
+        font-size: 0.7rem;
+    }
+    h3{
+        font-size: 0.9rem;
+    }
   }
 }

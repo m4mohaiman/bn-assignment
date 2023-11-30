@@ -108,7 +108,7 @@ function App() {
                       : cardUserName}
                   </h3>
                 </div>
-                <div>
+                <div className="footer__expriy">
                   <h5>Expiry Date</h5>
                   <h3>
                     {cardExpireMonth} / {cardExpireYear}
